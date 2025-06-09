@@ -1,0 +1,165 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #5cb85c; /* 초록색 계열 */
+    color: white;
+    padding: 20px 0;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2em;
+}
+
+main {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+
+section {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+h2 {
+    color: #4CAF50; /* 초록색 */
+    font-size: 1.6em;
+    margin-bottom: 20px;
+}
+
+/* 파일 업로드 섹션 */
+#imageUpload {
+    display: none; /* 실제 인풋은 숨김 */
+}
+
+.upload-section label, .guide-text {
+    display: block;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 40px 20px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #666;
+    transition: border-color 0.3s ease;
+}
+
+.upload-section label:hover, .upload-section input[type="file"]:hover + .guide-text {
+    border-color: #5cb85c;
+}
+
+/* SNS 옵션 버튼 */
+.sns-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.sns-options button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #555;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.sns-options button:hover, .sns-options button.selected {
+    background-color: #5cb85c;
+    color: white;
+    border-color: #4CAF50;
+}
+
+/* 미리보기 및 다운로드 */
+.preview-area {
+    position: relative;
+    width: 250px; /* 미리보기 크기 */
+    height: 250px;
+    border: 1px solid #eee;
+    margin: 30px auto 20px;
+    background-color: #f9f9f9;
+    overflow: hidden; /* 캔버스 외곽 자르기 */
+    border-radius: 10px; /* 사각형 미리보기 */
+}
+
+#imageCanvas {
+    width: 100%;
+    height: 100%;
+    display: block; /* 캔버스 하단 여백 제거 */
+}
+
+.preview-guide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #bbb;
+    font-size: 0.9em;
+    pointer-events: none; /* 캔버스 클릭 방해 방지 */
+    text-align: center;
+}
+.preview-guide p {
+    margin: 0;
+}
+
+.download-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+    background-color: #45a049;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    color: #777;
+    font-size: 0.9em;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    main {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    .sns-options button {
+        width: 100%; /* 모바일에서 버튼 너비 100% */
+        max-width: 250px;
+    }
+}
