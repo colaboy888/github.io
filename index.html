@@ -6,8 +6,6 @@
     <title>✨ SNS 프로필 사진 최적화 도구 ✨</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
-    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -17,10 +15,10 @@
     <main>
         <section class="upload-section">
             <h2>1. 사진을 업로드 해주세요</h2>
-            <div class="drop-area" id="dropArea">
+            <label for="imageUpload" class="drop-area">
                 <input type="file" id="imageUpload" accept="image/*">
                 <p class="guide-text">클릭하거나 파일을 여기에 끌어다 놓으세요.</p>
-            </div>
+            </label>
         </section>
 
         <section class="tool-section" style="display: none;">
@@ -33,14 +31,29 @@
                 <button data-sns="x">X(트위터) (원형)</button>
                 </div>
 
-            <h2>3. 미리보기 & 조절 (필요시)</h2>
-            <div class="image-container">
-                <img id="imageToCrop" alt="Upload your image">
+            <h2>3. 이미지 조절 (필요시) & 미리보기</h2>
+            <div class="image-editor-container">
+                <img id="imageToCrop" src="" alt="업로드된 이미지">
             </div>
-            <p class="crop-guide">위 이미지에서 마우스를 드래그하여 원하는 부분을 선택하세요.</p>
+            <div class="cropper-buttons">
+                <button id="rotateLeftBtn" title="시계 반대 방향 회전"><i class="fas fa-undo"></i> 좌회전</button>
+                <button id="rotateRightBtn" title="시계 방향 회전"><i class="fas fa-redo"></i> 우회전</button>
+                <button id="zoomInBtn" title="확대"><i class="fas fa-search-plus"></i> 확대</button>
+                <button id="zoomOutBtn" title="축소"><i class="fas fa-search-minus"></i> 축소</button>
+                <button id="resetBtn" title="초기화"><i class="fas fa-sync-alt"></i> 초기화</button>
+            </div>
+            <p class="crop-guide">위 이미지에서 드래그하여 크롭 영역을 조절하고, 아래 미리보기를 확인하세요.</p>
+
+            <div class="preview-area">
+                <canvas id="imageCanvas"></canvas>
+                <div class="preview-guide" style="display: none;">
+                    <p>최적화된 미리보기</p>
+                </div>
+            </div>
 
             <h2>4. 다운로드</h2>
-            <button id="downloadBtn" class="download-btn" disabled>다운로드</button>
+            <button id="downloadBtn" class="download-btn">다운로드</button>
+            
         </section>
     </main>
 
@@ -48,5 +61,6 @@
         <p>&copy; 2025 당신의 SNS 프로필 최적화 도구. All rights reserved.</p>
         <p>Designed for easy SNS profile photo management.</p>
     </footer>
-</body>
-</html>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1

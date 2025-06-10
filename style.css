@@ -8,6 +8,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    box-sizing: border-box; /* 패딩이 너비/높이에 포함되도록 */
 }
 
 header {
@@ -23,6 +24,11 @@ header {
 h1 {
     margin: 0;
     font-size: 2.2em;
+}
+
+header p {
+    font-size: 1.1em;
+    margin: 5px 0 0;
 }
 
 main {
@@ -47,12 +53,8 @@ h2 {
 }
 
 /* 파일 업로드 섹션 */
-#imageUpload {
-    display: none; /* 실제 인풋은 숨김 */
-}
-
-.upload-section label, .guide-text {
-    display: block;
+.drop-area {
+    display: block; /* label 태그를 블록 요소처럼 */
     border: 2px dashed #ccc;
     border-radius: 8px;
     padding: 40px 20px;
@@ -62,9 +64,68 @@ h2 {
     transition: border-color 0.3s ease;
 }
 
-.upload-section label:hover, .upload-section input[type="file"]:hover + .guide-text {
+.drop-area:hover {
     border-color: #5cb85c;
 }
+
+#imageUpload {
+    display: none; /* 실제 input은 숨김 */
+}
+
+/* 이미지 편집 컨테이너 (Cropper.js용) */
+.image-editor-container {
+    width: 100%;
+    max-width: 500px; /* 크롭할 이미지 컨테이너 크기 */
+    height: 350px;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Cropper가 컨테이너 밖으로 나가지 않도록 */
+    margin: 20px auto 0;
+    display: flex; /* 이미지를 중앙에 배치하기 위함 */
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#imageToCrop {
+    max-width: 100%; /* Cropper가 이 이미지에 적용됨 */
+    display: block;
+}
+
+.cropper-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px; /* 이미지 컨테이너와의 간격 */
+    margin-bottom: 20px;
+}
+
+.cropper-buttons button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: #555;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cropper-buttons button:hover {
+    background-color: #e0e0e0;
+}
+
+.crop-guide {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: -10px; /* Cropper 버튼과의 간격 조절 */
+    margin-bottom: 30px;
+}
+
 
 /* SNS 옵션 버튼 */
 .sns-options {
@@ -92,7 +153,7 @@ h2 {
     border-color: #4CAF50;
 }
 
-/* 미리보기 및 다운로드 */
+/* 미리보기 영역 */
 .preview-area {
     position: relative;
     width: 250px; /* 미리보기 크기 */
@@ -101,7 +162,12 @@ h2 {
     margin: 30px auto 20px;
     background-color: #f9f9f9;
     overflow: hidden; /* 캔버스 외곽 자르기 */
-    border-radius: 10px; /* 사각형 미리보기 */
+    border-radius: 10px; /* 기본 사각형 미리보기 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.preview-area.circle {
+    border-radius: 50%; /* 원형 미리보기 */
 }
 
 #imageCanvas {
@@ -119,11 +185,13 @@ h2 {
     font-size: 0.9em;
     pointer-events: none; /* 캔버스 클릭 방해 방지 */
     text-align: center;
+    z-index: 10; /* 캔버스 위에 표시 */
 }
 .preview-guide p {
     margin: 0;
 }
 
+/* 다운로드 버튼 */
 .download-btn {
     background-color: #4CAF50;
     color: white;
@@ -133,11 +201,18 @@ h2 {
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px; /* 미리보기 영역과의 간격 */
 }
 
 .download-btn:hover {
     background-color: #45a049;
 }
+
+.download-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 
 footer {
     margin-top: 50px;
@@ -145,6 +220,7 @@ footer {
     text-align: center;
     color: #777;
     font-size: 0.9em;
+    width: 100%;
 }
 
 /* 모바일 반응형 */
@@ -161,5 +237,8 @@ footer {
     .sns-options button {
         width: 100%; /* 모바일에서 버튼 너비 100% */
         max-width: 250px;
+    }
+    .image-editor-container {
+        height: 250px; /* 모바일에서 높이 조정 */
     }
 }
