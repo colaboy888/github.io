@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (!cropper) return; // Cropper.js 인스턴스가 없으면 함수 종료
 
         // 현재 선택된 SNS 설정 또는 기본 Instagram 설정을 가져옵니다.
-        const config = SNS_CONFIG[currentSNSType || 'instagram'];
+        const config = SNS_CONFIG[currentSNSType || 'instagram']; // 선택 없으면 인스타그램 기본
         const targetSize = config.size; // 최종 이미지 크기 (예: 1080px)
 
         // Cropper.js에서 현재 크롭된 영역의 이미지를 캔버스 형태로 가져옵니다.
@@ -128,10 +128,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             imageSmoothingQuality: 'high' // 이미지 스무딩 품질 설정
         });
 
-        // 미리보기 캔버스의 크기를 설정하고 기존 내용을 지웁니다.
-        imageCanvas.width = targetSize;
+        imageCanvas.width = targetSize; // 미리보기 캔버스 크기를 설정
         imageCanvas.height = targetSize;
-        ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height);
+        ctx.clearRect(0, 0, imageCanvas.width, imageCanvas.height); // 캔버스 내용 지우기
 
         // 크롭된 이미지를 미리보기 캔버스에 그립니다.
         ctx.drawImage(croppedCanvas, 0, 0, targetSize, targetSize);
